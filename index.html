@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mumbai Luxury Hotel | Официальный сайт</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c5a059;
+            --gold-dark: #a88543;
+            --dark-bg: #121212;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            background: var(--white);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+        }
+
+        section {
+            padding: 100px 10%;
+        }
+
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: var(--white);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 10%;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 28px;
+            letter-spacing: 4px;
+            color: var(--gold);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 35px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .hover-underline::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0; left: 0;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+
+        .hover-underline:hover::after {
+            width: 100%;
+        }
+
+        .dropdown { position: relative; }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--white);
+            list-style: none;
+            padding: 15px 0;
+            min-width: 220px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: var(--transition);
+            border-top: 2px solid var(--gold);
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu a {
+            padding: 10px 25px;
+            display: block;
+            text-transform: none;
+            font-size: 14px;
+            letter-spacing: 0;
+        }
+
+        .btn-book {
+            background: var(--gold);
+            color: var(--white) !important;
+            padding: 12px 25px !important;
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .btn-book:hover {
+            background: var(--dark-bg);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            height: 85vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 60px;
+        }
+
+        .hero h1 { font-size: 4rem; margin-bottom: 20px; }
+        .hero p { font-size: 1.2rem; font-weight: 300; max-width: 700px; }
+
+        .about { display: flex; align-items: center; gap: 80px; background: var(--light-bg); }
+        .about-text { flex: 1; }
+        .about-text h2 { font-size: 2.8rem; margin-bottom: 25px; }
+        .about-image { flex: 1; position: relative; }
+        .about-image img { width: 100%; border-radius: 4px; box-shadow: 20px 20px 0 var(--gold); }
+
+        .rooms { text-align: center; background: var(--white); }
+        .rooms h2 { font-size: 2.5rem; margin-bottom: 50px; }
+        .room-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+        .room-card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+        .room-card:hover { transform: translateY(-10px); }
+        .room-img { height: 280px; background-size: cover; background-position: center; }
+        .room-info { padding: 30px; }
+        .price { color: var(--gold); font-weight: 600; font-size: 1.2rem; display: block; margin-top: 15px; }
+
+        .gallery { text-align: center; background: var(--light-bg); }
+        .gallery h2 { margin-bottom: 20px; font-size: 2.5rem; }
+        .gallery p { margin-bottom: 50px; color: #666; }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+        .gallery-item {
+            height: 250px;
+            overflow: hidden;
+            border-radius: 4px;
+            position: relative;
+        }
+        .gallery-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: var(--transition);
+            filter: brightness(80%);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+            filter: brightness(100%);
+        }
+
+        .contact { display: flex; gap: 100px; background: var(--white); }
+        .contact-form { flex: 1.5; }
+        .contact-info { flex: 1; }
+        .form-group { margin-bottom: 20px; }
+        input, textarea {
+            width: 100%; padding: 15px; border: 1px solid #ddd;
+            border-radius: 4px; font-family: 'Montserrat', sans-serif;
+            outline: none; transition: 0.3s;
+        }
+        input:focus { border-color: var(--gold); }
+        .btn-send {
+            background: var(--gold); color: var(--white); border: none;
+            padding: 15px 45px; cursor: pointer; transition: var(--transition);
+            font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .btn-send:hover { background: var(--dark-bg); }
+
+        .social-links { display: flex; gap: 15px; margin-top: 30px; }
+        .social-links a {
+            color: var(--gold); text-decoration: none; font-weight: 600;
+            border: 1px solid var(--gold); padding: 10px 20px; transition: 0.3s;
+        }
+        .social-links a:hover { background: var(--gold); color: var(--white); }
+
+        .main-footer {
+            background: var(--dark-bg);
+            color: var(--white);
+            padding: 80px 10% 40px 10%;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 50px;
+            padding-bottom: 50px;
+            border-bottom: 1px solid #333;
+        }
+        .footer-info p { color: #bbb; margin-top: 20px; max-width: 350px; }
+        .footer-links h4, .footer-contact h4 { color: var(--gold); margin-bottom: 20px; font-family: 'Cinzel', serif; }
+        .footer-links ul { list-style: none; padding: 0; }
+        .footer-links a { color: #bbb; text-decoration: none; line-height: 2.5; transition: 0.3s; }
+        .footer-links a:hover { color: var(--gold); padding-left: 5px; }
+        .footer-contact p { color: #bbb; margin: 10px 0; }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            font-size: 13px;
+            color: #666;
+        }
+        .no-copy { user-select: none; font-style: italic; }
+
+        @media (max-width: 992px) {
+            .about, .contact, .footer-content { flex-direction: column; grid-template-columns: 1fr; gap: 40px; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">MUMBAI</a>
+            <ul class="nav-links">
+                <li><a href="#about" class="hover-underline">Кто мы</a></li>
+                <li class="dropdown">
+                    <a href="#rooms" class="hover-underline">Номера ▼</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Deluxe Ocean Suite</a></li>
+                        <li><a href="#">Presidential Wing</a></li>
+                        <li><a href="#">Royal Penthouse</a></li>
+                    </ul>
+                </li>
+                <li><a href="#gallery" class="hover-underline">Галерея</a></li>
+                <li><a href="#contact" class="hover-underline">Контакты</a></li>
+                <li><a href="#contact" class="btn-book">ЗАБРОНИРОВАТЬ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Легендарная Роскошь</h1>
+            <p>Добро пожаловать в «Mumbai» — место, где история встречается с современным комфортом.</p>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="about-text">
+            <h2>Наше Наследие</h2>
+            <p>Отель Mumbai — это архитектурный шедевр, расположенный на побережье Аравийского моря. Мы предлагаем гостям уникальное сочетание восточного гостеприимства и сервиса мирового уровня.</p>
+            <p>На протяжении десятилетий мы принимаем мировых лидеров и ценителей истинной роскоши, создавая атмосферу абсолютного спокойствия.</p>
+        </div>
+        <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80" alt="Interior">
+        </div>
+    </section>
+
+    <section id="rooms" class="rooms">
+        <h2>Номера и Сюиты</h2>
+        <div class="room-grid">
+            <div class="room-card">
+                <div class="room-img" style="background-image: url('https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80');"></div>
+                <div class="room-info">
+                    <h3>Ocean Deluxe</h3>
+                    <p>Панорамный вид на море и изысканный декор.</p>
+                    <span class="price">от $350 / ночь</span>
+                </div>
+            </div>
+            <div class="room-card">
+                <div class="room-img" style="background-image: url('source/MANGH-P0178-Presidential-Suite-Living-Room.16x9.jpg.webp');"></div>
+                <div class="room-info">
+                    <h3>Grand Presidential</h3>
+                    <p>Королевский простор и персональный сервис.</p>
+                    <span class="price">от $900 / ночь</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery">
+        <h2>Галерея Видов</h2>
+        <p>Почувствуйте атмосферу Мумбаи</p>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1529253355930-ddbe423a2ac7?auto=format&fit=crop&w=600&q=80" alt="Sea"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1566552881560-0be862a7c445?auto=format&fit=crop&w=600&q=80" alt="Rain"></div>
+            <div class="gallery-item"><img src="source/photo_2024-09-15_16-.jpg" alt="Arch"></div>
+            <div class="gallery-item"><img src="source/Gateway of India, Mumbai.jpg" alt="Gateway"></div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="contact-form">
+            <h2>Написать Нам</h2>
+            <form>
+                <div class="form-group"><input type="text" placeholder="Ваше имя" required></div>
+                <div class="form-group"><input type="email" placeholder="Email" required></div>
+                <div class="form-group"><textarea rows="5" placeholder="Сообщение"></textarea></div>
+                <button type="submit" class="btn-send">ОТПРАВИТЬ ЗАПРОС</button>
+            </form>
+        </div>
+        <div class="contact-info">
+            <h2>Контакты</h2>
+            <p>⛳ Marine Drive, 400020, Мумбаи, Индия</p>
+            <p>📞 +91 22 6665 3333</p>
+            <p>✉️ reservation@mumbai-hotel.com</p>
+            <div class="social-links">
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-info">
+                <a href="#" class="logo">MUMBAI</a>
+                <p>Ваш оазис в сердце Мумбаи. Роскошь, которая становится историей.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Навигация</h4>
+                <ul>
+                    <li><a href="#">Главная</a></li>
+                    <li><a href="#">Карьера</a></li>
+                    <li><a href="#">Пресс-центр</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Помощь</h4>
+                <p>📍 Marine Drive, Mumbai</p>
+                <p>📞 +91 22 6665 3333</p>
+                <p>✉️ info@mumbai-hotel.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Отель Mumbai. Все права защищены. <span class="no-copy">Копирование материалов запрещено.</span></p>
+        </div>
+    </footer>
+
+</body>
+</html>
