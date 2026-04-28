@@ -15,6 +15,10 @@
             --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
         html {
             scroll-behavior: smooth;
         }
@@ -34,7 +38,7 @@
         }
 
         section {
-            padding: 100px 10%;
+            padding: 80px 10%;
         }
 
         header {
@@ -51,30 +55,53 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 10%;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .logo {
             font-family: 'Cinzel', serif;
-            font-size: 28px;
+            font-size: 24px;
             letter-spacing: 4px;
             color: var(--gold);
             text-decoration: none;
-            transition: var(--transition);
+            z-index: 1001;
+        }
+
+        #menu-toggle {
+            display: none;
+        }
+
+        .menu-icon {
+            display: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .menu-icon span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: var(--gold);
+            margin: 5px 0;
+            transition: 0.3s;
         }
 
         .nav-links {
             list-style: none;
             display: flex;
-            gap: 35px;
+            gap: 30px;
             margin: 0;
             padding: 0;
+            align-items: center;
         }
 
         .nav-links a {
             text-decoration: none;
             color: #333;
             font-weight: 500;
-            font-size: 14px;
+            font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 1px;
             position: relative;
@@ -124,20 +151,14 @@
             display: block;
             text-transform: none;
             font-size: 14px;
-            letter-spacing: 0;
         }
 
         .btn-book {
             background: var(--gold);
             color: var(--white) !important;
-            padding: 12px 25px !important;
+            padding: 10px 20px !important;
             border-radius: 2px;
             transition: var(--transition);
-        }
-
-        .btn-book:hover {
-            background: var(--dark-bg);
-            transform: translateY(-2px);
         }
 
         .hero {
@@ -151,24 +172,30 @@
             justify-content: center;
             text-align: center;
             color: var(--white);
-            margin-top: 60px;
+            margin-top: 50px;
+            padding: 0 20px;
         }
 
-        .hero h1 { font-size: 4rem; margin-bottom: 20px; }
-        .hero p { font-size: 1.2rem; font-weight: 300; max-width: 700px; }
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 4rem); margin-bottom: 20px; }
+        .hero p { font-size: clamp(1rem, 3vw, 1.2rem); max-width: 700px; font-weight: 300; }
 
-        .about { display: flex; align-items: center; gap: 80px; background: var(--light-bg); }
+        .about { display: flex; align-items: center; gap: 40px; background: var(--light-bg); }
         .about-text { flex: 1; }
-        .about-text h2 { font-size: 2.8rem; margin-bottom: 25px; }
-        .about-image { flex: 1; position: relative; }
-        .about-image img { width: 100%; border-radius: 4px; box-shadow: 20px 20px 0 var(--gold); }
+        .about-text h2 { font-size: clamp(1.8rem, 5vw, 2.8rem); margin-bottom: 20px; }
+        .about-image { flex: 1; display: flex; justify-content: center; }
+        .about-image img { 
+            width: 100%; 
+            max-width: 500px;
+            border-radius: 4px; 
+            box-shadow: 15px 15px 0 var(--gold); 
+        }
 
         .rooms { text-align: center; background: var(--white); }
-        .rooms h2 { font-size: 2.5rem; margin-bottom: 50px; }
+        .rooms h2 { font-size: clamp(1.8rem, 5vw, 2.5rem); margin-bottom: 40px; }
         .room-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
         .room-card {
             background: var(--white);
@@ -178,87 +205,85 @@
             transition: var(--transition);
         }
         .room-card:hover { transform: translateY(-10px); }
-        .room-img { height: 280px; background-size: cover; background-position: center; }
-        .room-info { padding: 30px; }
-        .price { color: var(--gold); font-weight: 600; font-size: 1.2rem; display: block; margin-top: 15px; }
+        .room-img { height: 250px; background-size: cover; background-position: center; }
+        .room-info { padding: 25px; text-align: left; }
+        .price { color: var(--gold); font-weight: 600; display: block; margin-top: 15px; }
 
         .gallery { text-align: center; background: var(--light-bg); }
-        .gallery h2 { margin-bottom: 20px; font-size: 2.5rem; }
-        .gallery p { margin-bottom: 50px; color: #666; }
+        .gallery h2 { margin-bottom: 20px; font-size: clamp(1.8rem, 5vw, 2.5rem); }
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 15px;
         }
-        .gallery-item {
-            height: 250px;
-            overflow: hidden;
-            border-radius: 4px;
-            position: relative;
-        }
+        .gallery-item { height: 250px; overflow: hidden; border-radius: 4px; }
         .gallery-item img {
             width: 100%; height: 100%; object-fit: cover;
             transition: var(--transition);
-            filter: brightness(80%);
+            filter: brightness(85%);
         }
-        .gallery-item:hover img {
-            transform: scale(1.1);
-            filter: brightness(100%);
-        }
+        .gallery-item:hover img { transform: scale(1.1); filter: brightness(100%); }
 
-        .contact { display: flex; gap: 100px; background: var(--white); }
-        .contact-form { flex: 1.5; }
-        .contact-info { flex: 1; }
-        .form-group { margin-bottom: 20px; }
+        .contact { display: flex; gap: 60px; background: var(--white); flex-wrap: wrap; }
+        .contact-form { flex: 1; min-width: 300px; }
+        .contact-info { flex: 0.8; min-width: 300px; }
+        .form-group { margin-bottom: 15px; }
         input, textarea {
-            width: 100%; padding: 15px; border: 1px solid #ddd;
+            width: 100%; padding: 12px; border: 1px solid #ddd;
             border-radius: 4px; font-family: 'Montserrat', sans-serif;
-            outline: none; transition: 0.3s;
+            outline: none;
         }
-        input:focus { border-color: var(--gold); }
         .btn-send {
             background: var(--gold); color: var(--white); border: none;
-            padding: 15px 45px; cursor: pointer; transition: var(--transition);
-            font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+            padding: 12px 35px; cursor: pointer; transition: var(--transition);
+            font-weight: 600; text-transform: uppercase; width: 100%;
         }
-        .btn-send:hover { background: var(--dark-bg); }
 
-        .social-links { display: flex; gap: 15px; margin-top: 30px; }
+        .social-links { display: flex; gap: 15px; margin-top: 25px; }
         .social-links a {
             color: var(--gold); text-decoration: none; font-weight: 600;
-            border: 1px solid var(--gold); padding: 10px 20px; transition: 0.3s;
+            border: 1px solid var(--gold); padding: 8px 15px; transition: 0.3s;
         }
-        .social-links a:hover { background: var(--gold); color: var(--white); }
 
         .main-footer {
             background: var(--dark-bg);
             color: var(--white);
-            padding: 80px 10% 40px 10%;
+            padding: 60px 10% 30px 10%;
         }
         .footer-content {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 50px;
-            padding-bottom: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            padding-bottom: 40px;
             border-bottom: 1px solid #333;
         }
-        .footer-info p { color: #bbb; margin-top: 20px; max-width: 350px; }
-        .footer-links h4, .footer-contact h4 { color: var(--gold); margin-bottom: 20px; font-family: 'Cinzel', serif; }
+        .footer-info p { color: #bbb; margin-top: 15px; font-size: 14px; }
+        .footer-links h4, .footer-contact h4 { color: var(--gold); margin-bottom: 15px; font-family: 'Cinzel', serif; }
         .footer-links ul { list-style: none; padding: 0; }
-        .footer-links a { color: #bbb; text-decoration: none; line-height: 2.5; transition: 0.3s; }
-        .footer-links a:hover { color: var(--gold); padding-left: 5px; }
-        .footer-contact p { color: #bbb; margin: 10px 0; }
-        .footer-bottom {
-            text-align: center;
-            padding-top: 40px;
-            font-size: 13px;
-            color: #666;
-        }
-        .no-copy { user-select: none; font-style: italic; }
+        .footer-links a { color: #bbb; text-decoration: none; line-height: 2; font-size: 14px; }
+        .footer-contact p { color: #bbb; margin: 5px 0; font-size: 14px; }
+        .footer-bottom { text-align: center; padding-top: 30px; font-size: 12px; color: #666; }
 
         @media (max-width: 992px) {
-            .about, .contact, .footer-content { flex-direction: column; grid-template-columns: 1fr; gap: 40px; }
-            .hero h1 { font-size: 2.5rem; }
+            section { padding: 60px 5%; }
+            .about { flex-direction: column; text-align: center; }
+            .contact { gap: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            .menu-icon { display: block; }
+            .nav-links {
+                position: fixed; top: 0; right: -100%; height: 100vh;
+                width: 250px; background: var(--white);
+                flex-direction: column; justify-content: center;
+                transition: 0.4s; box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+            #menu-toggle:checked ~ .nav-links { right: 0; }
+            #menu-toggle:checked ~ .menu-icon span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+            #menu-toggle:checked ~ .menu-icon span:nth-child(2) { opacity: 0; }
+            #menu-toggle:checked ~ .menu-icon span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+            .nav-links li { margin: 15px 0; }
+            .dropdown-menu { position: static; opacity: 1; visibility: visible; box-shadow: none; background: var(--light-bg); }
         }
     </style>
 </head>
@@ -267,6 +292,10 @@
     <header>
         <nav class="navbar">
             <a href="#" class="logo">MUMBAI</a>
+            <input type="checkbox" id="menu-toggle">
+            <label for="menu-toggle" class="menu-icon">
+                <span></span><span></span><span></span>
+            </label>
             <ul class="nav-links">
                 <li><a href="#about" class="hover-underline">Кто мы</a></li>
                 <li class="dropdown">
@@ -295,7 +324,6 @@
         <div class="about-text">
             <h2>Наше Наследие</h2>
             <p>Отель Mumbai — это архитектурный шедевр, расположенный на побережье Аравийского моря. Мы предлагаем гостям уникальное сочетание восточного гостеприимства и сервиса мирового уровня.</p>
-            <p>На протяжении десятилетий мы принимаем мировых лидеров и ценителей истинной роскоши, создавая атмосферу абсолютного спокойствия.</p>
         </div>
         <div class="about-image">
             <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80" alt="Interior">
@@ -314,6 +342,7 @@
                 </div>
             </div>
             <div class="room-card">
+                <!-- ТВОЯ ФОТОГРАФИЯ -->
                 <div class="room-img" style="background-image: url('source/MANGH-P0178-Presidential-Suite-Living-Room.16x9.jpg.webp');"></div>
                 <div class="room-info">
                     <h3>Grand Presidential</h3>
@@ -326,10 +355,10 @@
 
     <section id="gallery" class="gallery">
         <h2>Галерея Видов</h2>
-        <p>Почувствуйте атмосферу Мумбаи</p>
         <div class="gallery-grid">
             <div class="gallery-item"><img src="https://images.unsplash.com/photo-1529253355930-ddbe423a2ac7?auto=format&fit=crop&w=600&q=80" alt="Sea"></div>
             <div class="gallery-item"><img src="https://images.unsplash.com/photo-1566552881560-0be862a7c445?auto=format&fit=crop&w=600&q=80" alt="Rain"></div>
+            <!-- ТВОИ ФОТОГРАФИИ -->
             <div class="gallery-item"><img src="source/photo_2024-09-15_16-.jpg" alt="Arch"></div>
             <div class="gallery-item"><img src="source/Gateway of India, Mumbai.jpg" alt="Gateway"></div>
         </div>
@@ -350,10 +379,7 @@
             <p>⛳ Marine Drive, 400020, Мумбаи, Индия</p>
             <p>📞 +91 22 6665 3333</p>
             <p>✉️ reservation@mumbai-hotel.com</p>
-            <div class="social-links">
-                <a href="#">Instagram</a>
-                <a href="#">Facebook</a>
-            </div>
+            <div class="social-links"><a href="#">Instagram</a><a href="#">Facebook</a></div>
         </div>
     </section>
 
@@ -365,21 +391,16 @@
             </div>
             <div class="footer-links">
                 <h4>Навигация</h4>
-                <ul>
-                    <li><a href="#">Главная</a></li>
-                    <li><a href="#">Карьера</a></li>
-                    <li><a href="#">Пресс-центр</a></li>
-                </ul>
+                <ul><li><a href="#">Главная</a></li><li><a href="#">Карьера</a></li></ul>
             </div>
             <div class="footer-contact">
                 <h4>Помощь</h4>
                 <p>📍 Marine Drive, Mumbai</p>
                 <p>📞 +91 22 6665 3333</p>
-                <p>✉️ info@mumbai-hotel.com</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Отель Mumbai. Все права защищены. <span class="no-copy">Копирование материалов запрещено.</span></p>
+            <p>&copy; 2026 Отель Mumbai. Все права защищены.</p>
         </div>
     </footer>
 
